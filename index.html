@@ -78,10 +78,10 @@
                     </div>
                     <div class="form-group">
                           
-                        <!-- <img ng-src="{{image_source}}" id="imageId" width="100%" height="100%"/> -->
+                      <img ng-src="../test.jpg" id="imageId" width="100%" height="100%" style="display:none;"/>
                     </div>
                     <div class="container">
-                        <canvas   id="preview"></canvas>
+                        <canvas width="100%" height="100%"   id="preview"></canvas>
                     </div>
                    
     ​​​​​​​​​​​​​​                  <div class="form-group">
@@ -168,8 +168,8 @@
 <script src="../Test2/angular-animate.min.js"></script>
 <script src="../Test2/angular-touch.min.js"></script>
 <script src="../Test2/ui-bootstrap-tpls-2.5.0.js"></script>
-<!-- 
-<script src="../angular.min.js"></script>
+
+<!-- <script src="../angular.min.js"></script>
 <script src="../angular-route.min.js"></script>
 <script src="../angular-animate.min.js"></script>
 <script src="../angular-touch.min.js"></script>
@@ -373,47 +373,95 @@ app.controller("views.test2.create", [
                     vm.popup1.opened = true;
                 };
                 vm.fileObject=null;
-                $scope.uploadFile = function(element) {
-                        var fd = new FormData();
-                        //Take the first selected file
-                        fd.append("file", element[0]);
 
-                        vm.fileObject=element[0];
+           
+                var img = angular.element(document.querySelector('#imageId'))[0];
 
-                        var reader = new FileReader();
 
-                        reader.onload = function(event) {
-                          //  $scope.image_source = event.target.result;
-                        
-                             var imageObj = new Image();
-                                imageObj.onload = function(){
+               
 
-                                    if(imageObj.complete)
-                                    {
+                function loaded() {
 
-                                        var t = angular.element(document.querySelector('#preview'))[0];
+                     var date="Aug 14, 2021 15:01:30";
+                     var roadName="Unnamed Road";
+                     var startLocation=-150;
+                     var spaceY=27;
+                     var spaceX=0;
+                     var t = angular.element(document.querySelector('#preview'))[0];
                                                     var context = t.getContext('2d');
 
-                                                    t.width=imageObj.width;
-                                                    t.height= imageObj.height;
-                                        context.drawImage(imageObj, 0, 0,imageObj.width,imageObj.height);
-                                                        context.font = "40pt Calibri";
-                                                        context.fillText("My TEXT!", 20, 20);;
-                                    }
+                                                    t.width=img.naturalWidth;
+                                                     t.height= img.naturalHeight;
+
+                                                    var currentX=img.naturalWidth-(img.naturalWidth *.42)    ;
+                                                    var currentY=img.naturalHeight-(img.naturalHeight *.2);
+                                        context.drawImage(img, 0, 0,img.naturalWidth,img.naturalHeight);
+                                        context.fillStyle="#fffdfa";
+                                                        context.font = "18.5pt Arial";
+                                                        context.fillText(date, currentX, currentY+startLocation);;
+                                                        context.fillText(roadName, currentX, currentY+startLocation+spaceY);;
+    
+
+                }
+
+                if (img.complete) {
+                  loaded()
+                  
+                } else {
+                  img.addEventListener('load', loaded)
+                  img.addEventListener('error', function() {
+                      alert('error')
+                  })
+                }
+
+
+                
+              
+
+              //   $scope.uploadFile = function(element) {
+              //           var fd = new FormData();
+              //           //Take the first selected file
+              //           fd.append("file", element[0]);
+
+              //           vm.fileObject=element[0];
+
+              //           var reader = new FileReader();
+
+              //           reader.onload = function(event) {
+              //              $scope.image_source = event.target.result;
+                        
+              //                var imageObj = new Image();
+              //                   imageObj.onload = function(){
+
+              //                       if(imageObj.complete)
+              //                       {
+
+              //                           var t = angular.element(document.querySelector('#preview'))[0];
+              //                                       var context = t.getContext('2d');
+
+              //                                       t.width=imageObj.width;
+              //                                        t.height= imageObj.height;
+
+              //                                       var currentX=imageObj.width-(imageObj.width *.3)    ;
+              //                                       var currentY=imageObj.height-(imageObj.height *.2);
+              //                           context.drawImage(imageObj, 0, 0,imageObj.width,imageObj.height);
+              //                                           context.font = "40pt Calibri";
+              //                                           context.fillText("My TEXT!", currentX, currentY);;
+              //                       }
                               
-                                };
+              //                   };
                                
-                                imageObj.src = event.target.result; 
+              //                   imageObj.src = event.target.result; 
 
 
                    
-                             //   $scope.$apply();
+              //                //   $scope.$apply();
 
-                        }
-                        // when the file is read it triggers the onload event above.
-                       reader.readAsDataURL(element[0]);
+              //           }
+              //           // when the file is read it triggers the onload event above.
+              //          reader.readAsDataURL(element[0]);
 
-               };
+              //  };
 
 
          vm.onChangeImage=function(){
