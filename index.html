@@ -71,29 +71,38 @@
                              ng-change="vm.changedTime();vm.onChangeImage();" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
                     </div>
                     <div class="form-group">
+                      <label for="clientCode">
+                  
+                          <span class="text-danger"></span>
+                      </label>
+                      <textarea class="form-control" rows="5" cols="6"  ng-model="vm.model.address" ng-change="vm.onChangeImage()"></textarea>
+
+                   </div>
+                    <div class="form-group">
                         <label for="inputStatus">បញ្ចូលរូប</label>
                         <span class="text-danger">*</span>
-                        <input type="file" name="file" id="file"  onchange="angular.element(this).scope().uploadFile(this.files)"/>
+                        <input type="file" name="file" id="file"  accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"  onchange="angular.element(this).scope().uploadFile(this.files)"/>
                     
                     </div>
                     <div class="form-group">
                       <!-- <img ng-src="../test.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
-                      <img ng-src="../Test2/test.jpg" id="imageId" width="100%" height="100%" style="display:none;"/>
+                      <!-- <img ng-src="../test.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
+                      <img ng-src="{{image_source}}" id="imageId" width="100%" height="100%" style="display:none;"/>
                     </div>
                     <div class="container">
                         <canvas width="100%" height="100%"   id="preview"></canvas>
                     </div>
-                   
-    ​​​​​​​​​​​​​​                  <div class="form-group">
+
+                  
+<!--                    
+   ​​​​​​​​​​                  <div class="form-group">
                         <label for="clientCode">
                     
                             <span class="text-danger"></span>
                         </label>
-                       
-
-<!--Div for mapsController Upload Started-->
+                  
 <div id="googleMap"></div>
-                </div>
+                </div>  -->
                 <div class="card-footer">
                    
                     <div class="fixed-bottom text-center" style=" bottom: 17px;"> <button type="submit" class="btn btn-success ng-mob" ng-click="vm.nextStep()">ជំហានបន្ទាប់</button></div>
@@ -163,13 +172,16 @@
 <!-- CSS only -->
 <script src="https://kit.fontawesome.com/49771d0941.js" crossorigin="anonymous"></script>
 
+
+<script src="../Test2/mlText.js"></script>
 <script src="../Test2/angular.min.js"></script>
 <script src="../Test2/angular-route.min.js"></script>
 <script src="../Test2/angular-animate.min.js"></script>
 <script src="../Test2/angular-touch.min.js"></script>
-<script src="../Test2/ui-bootstrap-tpls-2.5.0.js"></script>
+<script src="../Test2/ui-bootstrap-tpls-2.5.0.js"></script> 
 
-<!-- <script src="../angular.min.js"></script>
+<!-- <script src="../mlText.js"></script>
+<script src="../angular.min.js"></script>
 <script src="../angular-route.min.js"></script>
 <script src="../angular-animate.min.js"></script>
 <script src="../angular-touch.min.js"></script>
@@ -325,10 +337,12 @@ app.controller("views.test2.create", [
             // '$state',
             // '$stateParams',
             '$location',
+            '$filter',
             function ($scope,
             $rootScope,
             $compile,
-            $location
+            $location,
+            $filter
                 ) {
                 var vm = this;
                 vm.model = {
@@ -367,117 +381,102 @@ app.controller("views.test2.create", [
                 vm.changedTime = function () {
                 
                 };
+              
 
                 vm.datePicker = new Date();
                 vm.open1 = function () {
                     vm.popup1.opened = true;
                 };
-                vm.fileObject=null;
-
-           
-                var img = angular.element(document.querySelector('#imageId'))[0];
+              
+              
 
 
-               
+                function fillTextMultiLine(ctx, text, x, y) {
+                        var lineHeight = ctx.measureText("M").width * 1.2;
+                        var lines = text.split("\n");
+                        for (var i = 0; i < lines.length; ++i) {
+                          ctx.fillText(lines[i], x, y);
+                          y += lineHeight;
+                        }
+                      }
+              
 
-                function loaded() {
+                function getLine(dateText,timeText,address)
+                {
+                  //var allLine="Aug 14, 2021 15:01:30\nUnnamed Road\nKhan Mean Chey\nMean Chey\nPhnom Penh";
+                  var allLine=dateText+" "+timeText+"\n"+address;
+                  return allLine;
+                }
+                var canvas=null;
 
-                     var date="Aug 14, 2021 15:01:30";
-                     var roadName="Unnamed Road";
+                function loaded(dateText,timeText,address,img) {  
+                     
+                     var _lineDisplay=getLine(dateText,timeText,address);                   
                      var startLocation=-150;
                      var spaceY=27;
                      var spaceX=0;
-                     var t = angular.element(document.querySelector('#preview'))[0];
-                                                    var context = t.getContext('2d');
-
-                                                    t.width=img.naturalWidth;
-                                                     t.height= img.naturalHeight;
-
-                                                    var currentX=img.naturalWidth-(img.naturalWidth *.42)    ;
-                                                    var currentY=img.naturalHeight-(img.naturalHeight *.2);
-                                        context.drawImage(img, 0, 0,img.naturalWidth,img.naturalHeight);
-                                        context.fillStyle="#fffdfa";
+                     canvas = angular.element(document.querySelector('#preview'))[0];
+                                                     context = canvas.getContext('2d');
+                                                    var lh = 27;
+                                                    context.lineWidth = 1;
+                                                    canvas.width=img.naturalWidth;
+                                                    canvas.height= img.naturalHeight;
+                                                    var currentX=img.naturalWidth-300;//300;
+                                                    var currentY=img.naturalHeight-70;
+                                                        context.drawImage(img, 0, 0,img.naturalWidth,img.naturalHeight);
+                                                        context.fillStyle="#fffdfa";
                                                         context.font = "18.5pt Arial";
-                                                        context.fillText(date, currentX, currentY+startLocation);;
-                                                        context.fillText(roadName, currentX, currentY+startLocation+spaceY);;
-    
+                                                        context.mlFillText(_lineDisplay, currentX, currentY+startLocation, 300, 200, 'center', 'right', lh);
 
                 }
 
-                if (img.complete) {
-                  loaded()
-                  
-                } else {
-                  img.addEventListener('load', loaded)
-                  img.addEventListener('error', function() {
-                      alert('error')
-                  })
-                }
+               
 
 
                 
               
 
-              //   $scope.uploadFile = function(element) {
-              //           var fd = new FormData();
-              //           //Take the first selected file
-              //           fd.append("file", element[0]);
+                $scope.uploadFile = function(element) {
+                        var fd = new FormData();
+                        //Take the first selected file
+                        fd.append("file", element[0]);
 
-              //           vm.fileObject=element[0];
+                        var reader = new FileReader();
 
-              //           var reader = new FileReader();
+                        reader.onload = function(event) {
+                           $scope.image_source = event.target.result;
+                            $scope.$apply();
+                            //  var imageObj = new Image();
+                            //     imageObj.onload = function(){
 
-              //           reader.onload = function(event) {
-              //              $scope.image_source = event.target.result;
-                        
-              //                var imageObj = new Image();
-              //                   imageObj.onload = function(){
+                            //         if(imageObj.complete)
+                            //         {
+                            //               vm.onChangeImage();
+                            //         }                              
+                            //     };                               
+                            //     imageObj.src = event.target.result; 
 
-              //                       if(imageObj.complete)
-              //                       {
+                            vm.onChangeImage();
 
-              //                           var t = angular.element(document.querySelector('#preview'))[0];
-              //                                       var context = t.getContext('2d');
+                        }
+                        // when the file is read it triggers the onload event above.
+                       reader.readAsDataURL(element[0]);
 
-              //                                       t.width=imageObj.width;
-              //                                        t.height= imageObj.height;
-
-              //                                       var currentX=imageObj.width-(imageObj.width *.3)    ;
-              //                                       var currentY=imageObj.height-(imageObj.height *.2);
-              //                           context.drawImage(imageObj, 0, 0,imageObj.width,imageObj.height);
-              //                                           context.font = "40pt Calibri";
-              //                                           context.fillText("My TEXT!", currentX, currentY);;
-              //                       }
-                              
-              //                   };
-                               
-              //                   imageObj.src = event.target.result; 
-
-
-                   
-              //                //   $scope.$apply();
-
-              //           }
-              //           // when the file is read it triggers the onload event above.
-              //          reader.readAsDataURL(element[0]);
-
-              //  };
+               };
 
 
          vm.onChangeImage=function(){
-            //  debugger;
-            // if(!vm.fileObject) return;
-
-            // var context = document.querySelector('preview').getContext('2d');
-         
-            //     var imageObj = new Image();
-            //     imageObj.onload = function(){
-            //         context.drawImage(imageObj, 10, 10);
-            //         context.font = "40pt Calibri";
-            //         context.fillText("My TEXT!", 20, 20);
-            
-            //     };
-            //     imageObj.src = vm.fileObject; 
+                var dateText=$filter('date')(vm.model.createDate, 'MMM dd, yyyy');
+                var timeText=$filter('date')(vm.model.time, 'h:mm:ss');
+                var img = angular.element(document.querySelector('#imageId'))[0];
+                if (img.complete) {
+                  loaded(dateText,timeText,vm.model.address,img);
+                }else {
+                                img.addEventListener('load', loaded)
+                                img.addEventListener('error', function() {
+                                    alert('error')
+                                })
+                }
          };
 
                 $scope.hstep = 1;
@@ -504,53 +503,65 @@ app.controller("views.test2.create", [
 
                 
 
-            
+                vm.nextStep=function(){
+                        if(canvas==null)
+                        {
+                           alert("Upload Photo is Required");
+                           return;
+                        }
 
-//This is cities collection
-var cities = [{
-  city: 'Cambodia',
-  desc: 'Sangkat Olympic Phnom Penh',
-  lat: 11.554003,
-  long: 104.910986
-}
-];
+                        var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+                        window.location.href=image;
 
 
-$scope.highlighters = [];
-  $scope.gMap = null;
+                };
+
+// //This is cities collection
+// var cities = [{
+//   city: 'Cambodia',
+//   desc: 'Sangkat Olympic Phnom Penh',
+//   lat: 11.5528074,
+//   long: 104.911154
+// }
+// ];
+
+
+// $scope.highlighters = [];
+//   $scope.gMap = null;
   
-  var winInfo = new google.maps.InfoWindow();
+//   var winInfo = new google.maps.InfoWindow();
   
-  var googleMapOption = {
-    zoom: 16,
-    center: new google.maps.LatLng(11.554003, 104.910986),
-    mapTypeId: google.maps.MapTypeId.TERRAIN
-  };
+//   var googleMapOption = {
+//     zoom: 16,
+//     center: new google.maps.LatLng(11.554003, 104.910986),
+//     mapTypeId: google.maps.MapTypeId.TERRAIN
+//   };
 
-  $scope.gMap = new google.maps.Map(document.getElementById('googleMap'), googleMapOption);
+//   $scope.gMap = new google.maps.Map(document.getElementById('googleMap'), googleMapOption);
 
   
 
-  var createHighlighter = function(citi) {
+//   var createHighlighter = function(citi) {
 
-    var citiesInfo = new google.maps.Marker({
-      map: $scope.gMap,
-      position: new google.maps.LatLng(citi.lat, citi.long),
-      title: citi.city
-    });
+//     var citiesInfo = new google.maps.Marker({
+//       map: $scope.gMap,
+//       position: new google.maps.LatLng(citi.lat, citi.long),
+//       title: citi.city
+//     });
 
-    citiesInfo.content = '<div>' + citi.desc + '</div>';
+//     citiesInfo.content = '<div>' + citi.desc + '</div>';
 
-    google.maps.event.addListener(citiesInfo, 'click', function() {
-      winInfo.setContent('<h1>' + citiesInfo.title + '</h1>' + citiesInfo.content);
-      winInfo.open($scope.gMap, citiesInfo);
-    });
-    $scope.highlighters.push(citiesInfo);
-  };
+//     google.maps.event.addListener(citiesInfo, 'click', function() {
+//       winInfo.setContent('<h1>' + citiesInfo.title + '</h1>' + citiesInfo.content);
+//       winInfo.open($scope.gMap, citiesInfo);
+//       debugger;
+//     });
+//     $scope.highlighters.push(citiesInfo);
+//   };
 
-  for (i = 0; i < cities.length; i++) {
-    createHighlighter(cities[i]);
-  }
+//   for (i = 0; i < cities.length; i++) {
+//     createHighlighter(cities[i]);
+//   }
 
 
 }]);
