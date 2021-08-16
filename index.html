@@ -44,6 +44,26 @@
     
                 <div class="card-body">
                  
+                    <div class="form-group">
+                        <label for="inputStatus">បញ្ចូលរូប</label>
+                        <span class="text-danger">*</span>
+                        <input type="file" name="file" id="file"  accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"  onchange="angular.element(this).scope().uploadFile(this.files)"/>
+                    
+                    </div>
+                    <div class="form-group">
+                      <!-- <img ng-src="../test.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
+                      <!-- <img ng-src="../test.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
+                      <!--  -->
+                      <!--  -->
+                      <!-- -->
+                      <!--  -->
+                      <img ng-src="{{image_source}}" id="imageId" width="100%" height="100%" style="display:none;"/>
+                      <!-- <img ng-src="../test3.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
+                    </div>
+                    <div class="container">
+                        <canvas width="317" height="422.16"  style="background:gray;"  id="preview"></canvas>
+                    </div>
+                    <img id="toSaveId" />
     
                     <div class="form-group">
                         <label for="inputStatus">កាលបរិច្ឆេទ</label>
@@ -78,24 +98,7 @@
                       <textarea class="form-control" rows="5" cols="6"  ng-model="vm.model.address" ng-change="vm.onChangeImage()"></textarea>
 
                    </div>
-                    <div class="form-group">
-                        <label for="inputStatus">បញ្ចូលរូប</label>
-                        <span class="text-danger">*</span>
-                        <input type="file" name="file" id="file"  accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"  onchange="angular.element(this).scope().uploadFile(this.files)"/>
-                    
-                    </div>
-                    <div class="form-group">
-                      <!-- <img ng-src="../test.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
-                      <!-- <img ng-src="../test.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
-                      <!--  -->
-                      <!--  -->
-                      <img ng-src="{{image_source}}" id="imageId" width="100%" height="100%" style="display:none;"/>
-                      <!-- <img ng-src="../test3.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
-                    </div>
-                    <div class="container">
-                        <canvas width="100%" height="100%"   id="preview"></canvas>
-                    </div>
-                    <img id="toSaveId" />
+                  
 
                   
 <!--                    
@@ -412,25 +415,31 @@ app.controller("views.test2.create", [
                   return allLine;
                 }
                 var canvas=null;
+                vm.model.address="No RoadName\
+Khan Mean Chey\
+Mean Chey\
+Phnom Penh";
 
                 function loaded(dateText,timeText,address,img) {  
-                     
+                     if(!img) return;
                      var _lineDisplay=getLine(dateText,timeText,address);                   
-                     var startLocation=-150;
+                  
                      var spaceY=27;
                      var spaceX=0;
                      canvas = angular.element(document.querySelector('#preview'))[0];
                                                      context = canvas.getContext('2d');
-                                                    var lh = 47;
+                                                    var lh = 22.5;
                                                     context.lineWidth = 1;
-                                                    canvas.width=img.naturalWidth;
-                                                    canvas.height= img.naturalHeight;
-                                                    var currentX=img.naturalWidth-510;//300;
-                                                    var currentY=img.naturalHeight-139.5;
-                                                        context.drawImage(img, 0, 0,img.naturalWidth,img.naturalHeight);
+                                                    var startLocation=-(canvas.height *.6)//-150;
+                                                    // canvas.width=img.naturalWidth;
+                                                    // canvas.height= img.naturalHeight;
+                                                    var currentX=canvas.width - (canvas.width *.65);//img.naturalWidth-510;//300;
+                                                    
+                                                    var currentY=canvas.height - (canvas.height *.3);//img.naturalHeight-139.5;
+                                                        context.drawImage(img, 0, 0,canvas.width,canvas.height);
                                                         context.fillStyle="#fffdfa";
-                                                        context.font = "31pt Arial";
-                                                        context.mlFillText(_lineDisplay, currentX, currentY+startLocation, 500, 300, 'center', 'right', lh);
+                                                        context.font = "15pt Arial";
+                                                        context.mlFillText(_lineDisplay,currentX, currentY, 200, 120, 'center', 'right', lh);
 
                 }
 
