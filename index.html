@@ -123,23 +123,20 @@
 <!-- CSS only -->
 <script src="https://kit.fontawesome.com/49771d0941.js" crossorigin="anonymous"></script>
 
-<script src="../Test2/mlText.js"></script>
+<!-- <script src="../Test2/mlText.js"></script>
 <script src="../Test2/angular.min.js"></script>
 <script src="../Test2/angular-route.min.js"></script>
 <script src="../Test2/angular-animate.min.js"></script>
 <script src="../Test2/angular-touch.min.js"></script>
-<script src="../Test2/ui-bootstrap-tpls-2.5.0.js"></script>
+<script src="../Test2/ui-bootstrap-tpls-2.5.0.js"></script> -->
 
-<!-- <script src="../mlText.js"></script>
+<script src="../mlText.js"></script>
 <script src="../angular.min.js"></script>
 <script src="../angular-route.min.js"></script>
 <script src="../angular-animate.min.js"></script>
 <script src="../angular-touch.min.js"></script>
-<script src="../ui-bootstrap-tpls-2.5.0.js"></script> -->
-<script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5c4ws__3njU5XEKUOXpIH_ScpluY9apo&libraries=places&v=weekly"
-async
-></script>
+<script src="../ui-bootstrap-tpls-2.5.0.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5c4ws__3njU5XEKUOXpIH_ScpluY9apo"></script>
 
 
 <!-- JavaScript Bundle with Popper -->
@@ -267,13 +264,12 @@ app.controller("views.test2.create", [
                                                     var lh = 22.5;
                                                     context.lineWidth = 1;
                                                     var startLocation=-(canvas.height *.6)//-150;
-                                                    var  _imageWidth=(img.naturalWidth * .39) <375 ? 375:(img.naturalWidth * .39);
-                                                    var  _imageHeight=(img.naturalHeight * .39) <499 ? 499:(img.naturalHeight * .39);
+                                                    var  _imageWidth=375; //img.naturalWidth * .39;//(img.naturalWidth * .39) <375 ? 375:(img.naturalWidth * .39);
+                                                    var  _imageHeight=499; //img.naturalHeight * .39;//(img.naturalHeight * .39) <499 ? 499:(img.naturalHeight * .39);
                                                      
                                                      canvas.width=_imageWidth;
                                                      canvas.height=_imageHeight;
                                                     var currentX=canvas.width - (canvas.width *.56);//img.naturalWidth-510;//300;
-                                                    
                                                     var currentY=canvas.height - (canvas.height *.32);//img.naturalHeight-139.5;
                                                         context.drawImage(img, 0, 0,canvas.width,canvas.height);
                                                         context.fillStyle="#fffdfa";
