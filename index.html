@@ -21,10 +21,14 @@
 
         
         <div>
-            <div class="loader" ng-show="vm.loading">
+            <!--  -->
+            <div class="loader" ng-show="vm.loading" style="    text-align: center;
+            position: absolute;
+            top: 25%;
+            left: 40%;">
                 <div class="strip-holder">
                     <div class="spinner-border" style="width: 5rem; height: 5rem;" role="status">
-                        <span class="sr-only">សូមរង់ចាំ...</span>
+                        <span class="sr-only"></span>
                     </div>
                 </div>
             </div>
@@ -51,18 +55,11 @@
                     
                     </div>
                     <div class="form-group">
-                      <!-- <img ng-src="../test.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
-                      <!-- <img ng-src="../test.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
-                      <!--  -->
-                      <!--  -->
-                      <!-- -->
-                      <!--  -->
-                      <img ng-src="{{image_source}}" id="imageId" width="100%" height="100%" style="display:none;"/>
-                      <!-- <img ng-src="../test3.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
-                      <!-- <img ng-src="../test3.jpg" id="imageId" width="100%" height="100%" style="display:none;"/> -->
+                     
+                      <img ng-src="{{image_source}}" id="imageId" width="375" height="600" style="display:none;"/>
                     </div>
                     <div>
-                        <canvas width="375" height="677"  style="background:gray;"  id="preview"></canvas>
+                        <canvas width="375" height="600"  style="background:gray;"  id="preview"></canvas>
                     </div>
                     <img id="toSaveId" />
     
@@ -76,7 +73,7 @@
                                 </span>
                             </div>
                             <input type="text" class="form-control float-right"
-                                    style="    width: 375px !important;"
+                                    style="  329px !important"
                                    uib-datepicker-popup="{{vm.format}}"
                                    ng-model="vm.model.createDate"
                                    ng-change="vm.picker();vm.onChangeImage();"
@@ -93,32 +90,23 @@
                              style="    width: 375px !important;"
                              ng-change="vm.changedTime();vm.onChangeImage();" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" style="    margin-bottom: 42px;">
                       <label for="clientCode">
                   
                           <span class="text-danger"></span>
                       </label>
+                      <!-- <button class="btn btn-sm btn-primary" ng-click="vm.getLocation()">ចាប់យកទីតាំង</button> -->
                       <textarea
                       style="    width: 375px !important;"
                       class="form-control" rows="5" cols="6"  ng-model="vm.model.address" ng-change="vm.onChangeImage()"></textarea>
 
                    </div>
-                  
-
-                  
-<!--                    
-   ​​​​​​​​​​                  <div class="form-group">
-                        <label for="clientCode">
-                    
-                            <span class="text-danger"></span>
-                        </label>
-                  
-<div id="googleMap"></div>
-                </div>  -->
+    
                 <div class="card-footer">
                    
                     <div class="fixed-bottom text-center" style=" bottom: 17px;"> <button type="submit" class="btn btn-success ng-mob" ng-click="vm.nextStep()">ជំហានបន្ទាប់</button></div>
                 </div>
+                 <div style="display:none;" id="googleMap"></div>
             </form>
     
         </div>
@@ -127,55 +115,6 @@
 
 
 </script>
-
-
-<script type="text/ng-template" id="/addPhoto.html">
-    <div data-ng-controller="views.test2.add-phone as vm"  style="position:relative;">
-
-        
-        <div>
-            <div class="loader" ng-show="vm.loading">
-                <div class="strip-holder">
-                    <div class="spinner-border" style="width: 5rem; height: 5rem;" role="status">
-                        <span class="sr-only">សូមរង់ចាំ...</span>
-                    </div>
-                </div>
-            </div>
-            
-    
-          
-    
-            <form name="lotteryForm" role="form" ng-submit="vm.save()">
-    
-                <div>
-                 
-    
-              
-                <div class="card-footer">
-                   
-                    <div class="fixed-bottom text-center" style=" bottom: 17px;"> <button type="submit" class="btn btn-success ng-mob" ng-click="vm.nextStep()">បញ្ចប់</button></div>
-                </div>
-              </div>
-            </form>
-    
-        </div>
-    </div>
-    
-
-
-</script>
-
-<!-- 
-
-
-
-<script type="text/ng-template" id="/green.html">
-    green
-</script>
-
-<script type="text/ng-template" id="/blue.html">
-    blue
-</script> -->
 
 
 
@@ -185,21 +124,16 @@
 <script src="https://kit.fontawesome.com/49771d0941.js" crossorigin="anonymous"></script>
 
 
-<script src="../Test2/mlText.js"></script>
-<script src="../Test2/angular.min.js"></script>
-<script src="../Test2/angular-route.min.js"></script>
-<script src="../Test2/angular-animate.min.js"></script>
-<script src="../Test2/angular-touch.min.js"></script>
-<script src="../Test2/ui-bootstrap-tpls-2.5.0.js"></script> 
-
-<!-- <script src="../mlText.js"></script>
+<script src="../mlText.js"></script>
 <script src="../angular.min.js"></script>
 <script src="../angular-route.min.js"></script>
 <script src="../angular-animate.min.js"></script>
 <script src="../angular-touch.min.js"></script>
-<script src="../ui-bootstrap-tpls-2.5.0.js"></script> -->
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5c4ws__3njU5XEKUOXpIH_ScpluY9apo"></script>
+<script src="../ui-bootstrap-tpls-2.5.0.js"></script>
+<script
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5c4ws__3njU5XEKUOXpIH_ScpluY9apo&libraries=places&v=weekly"
+async
+></script>
 
 
 <!-- JavaScript Bundle with Popper -->
@@ -212,92 +146,6 @@
 var app = angular.module("myApp", ["ngRoute",  "ui.bootstrap"]);
 
 
-app.directive("drawing", function() {
-  return {
-    restrict: "A",
-    scope:{
-        file:"="
-    },
-    link: function(scope, element) {
-      var _file=scope.file;
-      debugger;
-      var canvas = element[0];
-      var ctx = canvas.getContext('2d');
-
-      loadImage("http://placehold.it/640x480");
-      //loadImage("http://placehold.it/100x80");
-      
-      
-      // variable that decides if something should be drawn on mousemove
-      var drawing = false;
-
-      // the last coordinates before the current move
-      var lastX;
-      var lastY;
-
-      element.bind('mousedown', function(event) {
-        if (event.offsetX !== undefined) {
-          lastX = event.offsetX;
-          lastY = event.offsetY;
-        } else {
-          lastX = event.layerX - event.currentTarget.offsetLeft;
-          lastY = event.layerY - event.currentTarget.offsetTop;
-        }
-
-        // begins new line
-        ctx.beginPath();
-
-        drawing = true;
-      });
-      element.bind('mousemove', function(event) {
-        if (drawing) {
-          // get current mouse position
-          if (event.offsetX !== undefined) {
-            currentX = event.offsetX;
-            currentY = event.offsetY;
-          } else {
-            currentX = event.layerX - event.currentTarget.offsetLeft;
-            currentY = event.layerY - event.currentTarget.offsetTop;
-          }
-
-          draw(lastX, lastY, currentX, currentY);
-
-          // set current coordinates to last one
-          lastX = currentX;
-          lastY = currentY;
-        }
-
-      });
-
-      element.bind('mouseup', function(event) {
-        // stop drawing  
-        drawing = false;
-      });
-
-      // canvas reset
-      function reset() {
-        element[0].width = element[0].width;
-      }
-
-      function loadImage(source){
-        var img = new Image();
-        img.src = source;
-
-        img.onload = function() {
-          ctx.drawImage(img, 0, 0, img.width, img.height,
-                             0, 0, canvas.width, canvas.height);
-        };  
-      };
-      
-      function draw(startX, startY, endX, endY) {
-        ctx.moveTo(startX, startY);
-        ctx.lineTo(endX, endY);
-        ctx.strokeStyle = "yellow";
-        ctx.stroke();
-      }
-    }
-  };
-});
 
 app.config(function($routeProvider) {
 
@@ -307,47 +155,14 @@ app.config(function($routeProvider) {
         templateUrl : "/main.html",
         controller: 'views.test2.create',
         controllerAs: 'vm'
-    }).when("/add-photo?date&time&place", {
-        templateUrl : "/addPhoto.html",
-        params:{
-            date:null,
-            time:null,
-            place:null
-        },
-        controller: 'views.test2.add-photo',
-        controllerAs: 'vm'
-    })
-    // .when("/red", {
-    //     templateUrl : "/red.html"
-    // })
-    // .when("/green", {
-    //     templateUrl : "/green.html"
-    // })
-    // .when("/blue", {
-    //     templateUrl : "/blue.html"
-    // });
+    });
+   
 });
-app.controller("views.test2.add-photo", [
-            '$scope',
-            '$rootScope',
-            '$compile',
-            // '$state',
-            '$stateParams',
-            function ($scope,
-            $rootScope,
-            $compile,
-            $stateParams
-                ) {
-                var vm = this;
-             var param=  $stateParams;
-            
- }]);
+
 app.controller("views.test2.create", [
             '$scope',
             '$rootScope',
             '$compile',
-            // '$state',
-            // '$stateParams',
             '$location',
             '$filter',
             function ($scope,
@@ -393,15 +208,15 @@ app.controller("views.test2.create", [
                 vm.changedTime = function () {
                 
                 };
-              
+                
 
                 vm.datePicker = new Date();
                 vm.open1 = function () {
                     vm.popup1.opened = true;
                 };
               
-              
-
+                
+           
 
                 function fillTextMultiLine(ctx, text, x, y) {
                         var lineHeight = ctx.measureText("M").width * 1.2;
@@ -413,21 +228,31 @@ app.controller("views.test2.create", [
                       }
               
 
-                function getLine(dateText,timeText,address)
+                function getLine(address)
                 {
-                  //var allLine="Aug 14, 2021 15:01:30\nUnnamed Road\nKhan Mean Chey\nMean Chey\nPhnom Penh";
+             
+                  var dateText=$filter('date')(vm.model.createDate, 'MMM dd, yyyy');
+                  var timeText=$filter('date')(vm.model.time, 'h:mm:ss');
                   var allLine=dateText+" "+timeText+"\n"+address;
                   return allLine;
                 }
                 var canvas=null;
-                vm.model.address="No RoadName\
-Khan Mean Chey\
-Mean Chey\
-Phnom Penh";
+                vm.model.address="";
 
-                function loaded(dateText,timeText,address,img) {  
-                     if(!img) return;
-                     var _lineDisplay=getLine(dateText,timeText,address);                   
+                function loaded(address,img) {  
+                    // if(img==null)
+                    // {
+                    //     alert("សូមបញ្ចូលរូបភាព");
+                    //     return;
+                    // } 
+                    // if(img.naturalWidth <375  || img.naturalWidth> 375)
+                    // {
+                    //     alert("សូមបញ្ចូលរូបភាពជាលក្ខណឈរ");
+                    //     return;
+                    // } 
+                    if(!img) return;
+                    
+                     var _lineDisplay=getLine(address);                   
                   
                      var spaceY=27;
                      var spaceX=0;
@@ -436,15 +261,18 @@ Phnom Penh";
                                                     var lh = 22.5;
                                                     context.lineWidth = 1;
                                                     var startLocation=-(canvas.height *.6)//-150;
-                                                    // canvas.width=img.naturalWidth;
-                                                    // canvas.height= img.naturalHeight;
-                                                    var currentX=canvas.width - (canvas.width *.55);//img.naturalWidth-510;//300;
+                                                    var  _imageWidth=(img.naturalWidth * .39) <375 ? 375:(img.naturalWidth * .39);
+                                                    var  _imageHeight=(img.naturalHeight * .39) <499 ? 499:(img.naturalHeight * .39);
+                                                     
+                                                     canvas.width=_imageWidth;
+                                                     canvas.height=_imageHeight;
+                                                    var currentX=canvas.width - (canvas.width *.56);//img.naturalWidth-510;//300;
                                                     
-                                                    var currentY=canvas.height - (canvas.height *.20);//img.naturalHeight-139.5;
+                                                    var currentY=canvas.height - (canvas.height *.32);//img.naturalHeight-139.5;
                                                         context.drawImage(img, 0, 0,canvas.width,canvas.height);
                                                         context.fillStyle="#fffdfa";
                                                         context.font = "14pt Arial";
-                                                        context.mlFillText(_lineDisplay,currentX, currentY, 200, 120, 'center', 'right', lh);
+                                                        context.mlFillText(_lineDisplay,currentX, currentY, 200, 150, 'center', 'right', lh);
 
                 }
 
@@ -471,6 +299,7 @@ Phnom Penh";
                         } else if (link.click) {
                             link.click();
                         }
+                        vm.loading=false;
                     }
                 
 
@@ -495,11 +324,10 @@ Phnom Penh";
 
                 
           vm.onChangeImage=function(){
-                  var dateText=$filter('date')(vm.model.createDate, 'MMM dd, yyyy');
-                  var timeText=$filter('date')(vm.model.time, 'h:mm:ss');
+                
                   var img = angular.element(document.querySelector('#imageId'))[0];
                   if (img.complete) {
-                    loaded(dateText,timeText,vm.model.address,img);
+                    loaded(vm.model.address,img);
                 }else {
                                 img.addEventListener('load', loaded)
                                 img.addEventListener('error', function() {
@@ -507,7 +335,7 @@ Phnom Penh";
                                 })
                 }
          };
-         vm.onChangeImage();
+              vm.onChangeImage();
                 $scope.hstep = 1;
                 $scope.mstep = 15;
                 $scope.ismeridian = true;
@@ -516,82 +344,40 @@ Phnom Penh";
                     mstep: [1, 5, 10, 15, 25, 30]
                 };
 
-              
-                vm.nextStep=function()
-                {
-                   var _date="Aug 14,2021";//vm.model.createDate;
-                   var _time="15:44:30";
-                   var _place="Unnamed Road,Khan Mean Chey,Meanchey,Phnom Penh";
-                    $location.path('/add-photo?date='+_date+"&time="+_time+"&_place"+_place);
-                }
-               
+             
 
                 vm.back = function () {
                     $state.go("search");
                 };
-
+                 
                 
 
                 vm.nextStep=function(){
+                    
                         if(canvas==null)
                         {
                            alert("Upload Photo is Required");
                            return;
                         }
-
+                        vm.loading=true;
+                        var dateText=$filter('date')(vm.model.createDate, 'yyyy-mm-dd');
+                        var timeText=$filter('date')(vm.model.time, 'h-mm-ss');
                       
-                     
-                       saveCanvasAs(canvas, 'export.png');       
+                        var fileName="photo_"+dateText+"_"+timeText+".jpg";
+                       saveCanvasAs(canvas,fileName);       
                 };
 
-// //This is cities collection
-// var cities = [{
-//   city: 'Cambodia',
-//   desc: 'Sangkat Olympic Phnom Penh',
-//   lat: 11.5528074,
-//   long: 104.911154
-// }
-// ];
 
+                vm.getLocation=function(){
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition);
+                    } else {
+                         alert("Geolocation is not supported by this browser.");
+                    }
+                };
 
-// $scope.highlighters = [];
-//   $scope.gMap = null;
-  
-//   var winInfo = new google.maps.InfoWindow();
-  
-//   var googleMapOption = {
-//     zoom: 16,
-//     center: new google.maps.LatLng(11.554003, 104.910986),
-//     mapTypeId: google.maps.MapTypeId.TERRAIN
-//   };
-
-//   $scope.gMap = new google.maps.Map(document.getElementById('googleMap'), googleMapOption);
-
-  
-
-//   var createHighlighter = function(citi) {
-
-//     var citiesInfo = new google.maps.Marker({
-//       map: $scope.gMap,
-//       position: new google.maps.LatLng(citi.lat, citi.long),
-//       title: citi.city
-//     });
-
-//     citiesInfo.content = '<div>' + citi.desc + '</div>';
-
-//     google.maps.event.addListener(citiesInfo, 'click', function() {
-//       winInfo.setContent('<h1>' + citiesInfo.title + '</h1>' + citiesInfo.content);
-//       winInfo.open($scope.gMap, citiesInfo);
-//       debugger;
-//     });
-//     $scope.highlighters.push(citiesInfo);
-//   };
-
-//   for (i = 0; i < cities.length; i++) {
-//     createHighlighter(cities[i]);
-//   }
-
-
+                
+            
 }]);
 </script>
 </body>
