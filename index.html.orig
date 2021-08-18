@@ -164,16 +164,26 @@
 <!-- CSS only -->
 <script src="https://kit.fontawesome.com/49771d0941.js" crossorigin="anonymous"></script>
 
+<<<<<<< HEAD
 
     <script src="../Test2/data.json"></script>
     <script src="../Test2/mlText.js"></script>
+=======
+ <script src="../Test2/mlText.js"></script>
+>>>>>>> a01143ce4d40f90a549a7b4ed9ac83d57f601ded
 <script src="../Test2/angular.min.js"></script>
 <script src="../Test2/angular-route.min.js"></script>
 <script src="../Test2/angular-animate.min.js"></script>
 <script src="../Test2/angular-touch.min.js"></script>
+<<<<<<< HEAD
 <script src="../Test2/ui-bootstrap-tpls-2.5.0.js"></script>
+<!-- <script src="../data.json"></script>
+<script src="../mlText.js"></script>
+=======
+<script src="../Test2/ui-bootstrap-tpls-2.5.0.js"></script> 
 
 <!--<script src="../mlText.js"></script>
+>>>>>>> a01143ce4d40f90a549a7b4ed9ac83d57f601ded
 <script src="../angular.min.js"></script>
 <script src="../angular-route.min.js"></script>
 <script src="../angular-animate.min.js"></script>
@@ -334,8 +344,13 @@ app.controller("views.test2.create", [
                                                     var currentY=canvas.height - (canvas.height *.30);//img.naturalHeight-139.5;
                                                         context.drawImage(img, 0, 0,canvas.width,canvas.height);
                                                         context.fillStyle="#fff";
+<<<<<<< HEAD
                                                         context.font = "11pt Battambang";
                                                         context.mlFillText(_lineDisplay,currentX, currentY, 300, 150, 'center', 'right', lh);
+=======
+                                                        context.font = "14pt Arial";
+                                                        context.mlFillText(_lineDisplay,currentX, currentY, 200, 150, 'center', 'right', lh);
+>>>>>>> a01143ce4d40f90a549a7b4ed9ac83d57f601ded
 
                 }
 
