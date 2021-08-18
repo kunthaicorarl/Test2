@@ -165,7 +165,7 @@
 <script src="https://kit.fontawesome.com/49771d0941.js" crossorigin="anonymous"></script>
 
 
-    <script src="../Test2/data.json"></script>
+
     <script src="../Test2/mlText.js"></script>
 <script src="../Test2/angular.min.js"></script>
 <script src="../Test2/angular-route.min.js"></script>
@@ -282,7 +282,7 @@ app.controller("views.test2.create", [
                 };
                 vm.addresses=[];
                 function initData(){
-                   $http.get('../data.json').then(function(result){
+                   $http.get('../Test2/data.json').then(function(result){
                     vm.addresses=result.data;
                     vm.model.address=vm.addresses[0].address;
                    });
