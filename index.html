@@ -16,10 +16,15 @@
 <div ng-view></div>
 
 
-<script type="text/ng-template" id="/main.html">
-    <div data-ng-controller="views.test2.create as vm"  style="position:relative;">
 
-        
+<script type="text/ng-template" id="/main.html">
+ 
+    <div data-ng-controller="views.test2.create as vm"  style="position:relative;" >
+
+      
+
+       
+
         <div>
             <!--  -->
             <div class="loader" ng-show="vm.loading" style="    text-align: center;
@@ -42,25 +47,49 @@
                 </div>
                 <!-- /.card-body -->
             </div>
-    
+     
     
             <form name="lotteryForm" role="form" ng-submit="vm.save()">
     
                 <div >
                  
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="inputStatus">បញ្ចូលរូប</label>
                         <span class="text-danger">*</span>
-                        <input type="file" name="file" id="file"  accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"  onchange="angular.element(this).scope().uploadFile(this.files)"/>
-                    
-                    </div>
+                        
+                    </div> -->
                     <div class="form-group">
                      
                       <img ng-src="{{image_source}}" id="imageId" width="375" height="600" style="display:none;"/>
                     </div>
-                    <div>
+                    <div style="position: relative;">
+                        <input type="file" name="file" id="file"
+                        style="
+                                position: absolute;
+                                left: 25%;
+                                color: #d8d8d859;
+                                position: absolute;
+                                top: 38%;
+                                left: 30%;
+                                z-index: 9999;
+                                cursor: pointer;
+                                /* font-size: 113px; */
+                                opacity: 0;
+                                width: 144px;
+                                height: 125px;
+                            "
+                          accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"  onchange="angular.element(this).scope().uploadFile(this.files)"/>
+                        <i  class="fas fa-photo-video" aria-hidden="true" style="
+                                color: #d8d8d859;
+                                position: absolute;
+                                top: 39%;
+                                left: 30%;
+                                font-size: 113px;
+                            "></i>
                         <canvas width="375" height="600"  style="background:gray;"  id="preview"></canvas>
                     </div>
+
+                  
                     <img id="toSaveId" />
     
                     <div class="form-group">
@@ -73,7 +102,7 @@
                                 </span>
                             </div>
                             <input type="text" class="form-control float-right"
-                                    style="  329px !important"
+                                    style=" width:329px !important"
                                    uib-datepicker-popup="{{vm.format}}"
                                    ng-model="vm.model.createDate"
                                    ng-change="vm.picker();vm.onChangeImage();"
@@ -90,18 +119,30 @@
                              style="    width: 375px !important;"
                              ng-change="vm.changedTime();vm.onChangeImage();" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
                     </div>
-                    <div class="form-group" style="    margin-bottom: 42px;">
-                      <label for="clientCode">
                   
-                          <span class="text-danger"></span>
-                      </label>
-                      <!-- <button class="btn btn-sm btn-primary" ng-click="vm.getLocation()">ចាប់យកទីតាំង</button> -->
-                      <textarea
-                      style="    width: 375px !important;"
-                      class="form-control" rows="5" cols="6"  ng-model="vm.model.address" ng-change="vm.onChangeImage()"></textarea>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ឈ្នោះទីតាំង</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="r in  vm.addresses track by $index" ng-style="{'background': r.selected?'#eaeaea':'#fff'}">
+                            <th scope="row">{{$index+1}}</th>
+                            <td><span ng-bind="r.address" ng-click="vm.onClick($index,r.address)"></span></td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                    <textarea
+                    style=" width: 375px !important;margin-bottom: 53px;"
+                    class="form-control" rows="5" cols="6"  ng-model="vm.model.address" ng-change="vm.onChangeImage()"></textarea>
 
-                   </div>
-    
+                
+                  
+                     
                 <div class="card-footer">
                    
                     <div class="fixed-bottom text-center" style=" bottom: 17px;"> <button type="submit" class="btn btn-success ng-mob" ng-click="vm.nextStep()">ជំហានបន្ទាប់</button></div>
@@ -123,19 +164,21 @@
 <!-- CSS only -->
 <script src="https://kit.fontawesome.com/49771d0941.js" crossorigin="anonymous"></script>
 
-<!-- <script src="../Test2/mlText.js"></script>
+
+    <script src="../Test2/data.json"></script>
+    <script src="../Test2/mlText.js"></script>
 <script src="../Test2/angular.min.js"></script>
 <script src="../Test2/angular-route.min.js"></script>
 <script src="../Test2/angular-animate.min.js"></script>
 <script src="../Test2/angular-touch.min.js"></script>
-<script src="../Test2/ui-bootstrap-tpls-2.5.0.js"></script> -->
-
+<script src="../Test2/ui-bootstrap-tpls-2.5.0.js"></script>
+<!-- <script src="../data.json"></script>
 <script src="../mlText.js"></script>
 <script src="../angular.min.js"></script>
 <script src="../angular-route.min.js"></script>
 <script src="../angular-animate.min.js"></script>
 <script src="../angular-touch.min.js"></script>
-<script src="../ui-bootstrap-tpls-2.5.0.js"></script>
+<script src="../ui-bootstrap-tpls-2.5.0.js"></script> -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5c4ws__3njU5XEKUOXpIH_ScpluY9apo"></script>
 
 
@@ -168,11 +211,17 @@ app.controller("views.test2.create", [
             '$compile',
             '$location',
             '$filter',
+            '$http',
+            '$document',
+            '$uibModal',   
             function ($scope,
             $rootScope,
             $compile,
             $location,
-            $filter
+            $filter,
+            $http,
+            $document,
+            $uibModal
                 ) {
                 var vm = this;
                 vm.model = {
@@ -211,13 +260,34 @@ app.controller("views.test2.create", [
                 vm.changedTime = function () {
                 
                 };
+
+
+                vm.onClick=function(index,address)
+                {
+                    vm.addresses=vm.addresses.map(function(item,key){
+                               item.selected=false;
+                               if(index==key)  item.selected=true;
+                               return item;
+                    });
+                    vm.model.address=address;
+
+                    vm.onChangeImage();
+
+                }
                 
 
                 vm.datePicker = new Date();
                 vm.open1 = function () {
                     vm.popup1.opened = true;
                 };
-              
+                vm.addresses=[];
+                function initData(){
+                   $http.get('../data.json').then(function(result){
+                    vm.addresses=result.data;
+                    vm.model.address=vm.addresses[0].address;
+                   });
+                }
+                initData();
                 
            
 
@@ -240,19 +310,10 @@ app.controller("views.test2.create", [
                   return allLine;
                 }
                 var canvas=null;
-                vm.model.address="";
+               
 
                 function loaded(address,img) {  
-                    // if(img==null)
-                    // {
-                    //     alert("សូមបញ្ចូលរូបភាព");
-                    //     return;
-                    // } 
-                    // if(img.naturalWidth <375  || img.naturalWidth> 375)
-                    // {
-                    //     alert("សូមបញ្ចូលរូបភាពជាលក្ខណឈរ");
-                    //     return;
-                    // } 
+                 
                     if(!img) return;
                     
                      var _lineDisplay=getLine(address);                   
@@ -261,7 +322,7 @@ app.controller("views.test2.create", [
                      var spaceX=0;
                      canvas = angular.element(document.querySelector('#preview'))[0];
                                                      context = canvas.getContext('2d');
-                                                    var lh = 22.5;
+                                                    var lh = 21.5;
                                                     context.lineWidth = 1;
                                                     var startLocation=-(canvas.height *.6)//-150;
                                                     var  _imageWidth=375; //img.naturalWidth * .39;//(img.naturalWidth * .39) <375 ? 375:(img.naturalWidth * .39);
@@ -269,12 +330,12 @@ app.controller("views.test2.create", [
                                                      
                                                      canvas.width=_imageWidth;
                                                      canvas.height=_imageHeight;
-                                                    var currentX=canvas.width - (canvas.width *.56);//img.naturalWidth-510;//300;
-                                                    var currentY=canvas.height - (canvas.height *.32);//img.naturalHeight-139.5;
+                                                    var currentX=canvas.width - (canvas.width *.82);//img.naturalWidth-510;//300;
+                                                    var currentY=canvas.height - (canvas.height *.30);//img.naturalHeight-139.5;
                                                         context.drawImage(img, 0, 0,canvas.width,canvas.height);
-                                                        context.fillStyle="#fffdfa";
-                                                        context.font = "14pt Arial";
-                                                        context.mlFillText(_lineDisplay,currentX, currentY, 200, 150, 'center', 'right', lh);
+                                                        context.fillStyle="#fff";
+                                                        context.font = "11pt Battambang";
+                                                        context.mlFillText(_lineDisplay,currentX, currentY, 300, 150, 'center', 'right', lh);
 
                 }
 
